@@ -12,7 +12,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="88dp"
-        android:hint="Phone Number"
+        android:hint="Phone Number with Country Code "
         android:inputType="phone"
         android:textAlignment="center"
         android:textSize="24sp" />
@@ -35,6 +35,8 @@
         android:layout_below="@+id/verifiTxt"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="35dp"
+        android:backgroundTint="@color/colorAccent"
+        android:textColor="@color/white"
         android:text="Verify" />
 
     <Button
@@ -44,6 +46,9 @@
         android:layout_below="@+id/veriBtn"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="26dp"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/Secondary"
+
         android:text="Authenticate" />
 
     <ProgressBar

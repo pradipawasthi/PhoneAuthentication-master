@@ -41,7 +41,7 @@ class PhoneAuthentication : AppCompatActivity() {
         mCallbacks = object: PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
             override fun onVerificationCompleted(credential: PhoneAuthCredential) {
                 progress.visibility = View.INVISIBLE
-                toast("Logged in Successfully :)  "+ credential)
+                toast("LoggedIn Success :)  "+ credential)
                 signIn(credential)
             }
 
@@ -62,15 +62,22 @@ class PhoneAuthentication : AppCompatActivity() {
 
         verificationCallbacks()
 
-        val phnNo = phnNoTxt.text.toString()
+        if(phnNoTxt.text.length>=13) {
+            val phnNo = phnNoTxt.text.toString()
+            PhoneAuthProvider.getInstance().verifyPhoneNumber(
+                    phnNo,
+                    60,
+                    TimeUnit.SECONDS,
+                    this,
+                    mCallbacks
+            )
+        }
+        else{
+            toast("please enter a valid contact number with country code!!")
+            progress.visibility = View.INVISIBLE
+        }
 
-        PhoneAuthProvider.getInstance().verifyPhoneNumber(
-                phnNo,
-                60,
-                TimeUnit.SECONDS,
-                this,
-                mCallbacks
-        )
+
     }
 
     private fun signIn (credential: PhoneAuthCredential) {
@@ -78,7 +85,7 @@ class PhoneAuthentication : AppCompatActivity() {
                 .addOnCompleteListener {
                     task: Task<AuthResult> ->
                     if (task.isSuccessful) {
-                        toast("Logged in Successfully :)")
+                        toast("LoggedIn Success !!)")
                         startActivity(Intent(this, MainActivity::class.java))
                     }
                 }
